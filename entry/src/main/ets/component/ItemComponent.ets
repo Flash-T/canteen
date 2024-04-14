@@ -2,7 +2,9 @@
 
 @Component
 export struct ItemComponent{
- @State  message: string = '楚园'
+
+ @State  message: string = ''
+
   build(){
     Column(){
       Row(){  //每一行的内容

@@ -1,40 +1,77 @@
 //  食堂页面
-import { ItemComponent } from '../component/ItemComponent'
-import { CanteenData } from './Models'
+import { HeaderComponent } from '../component/HeaderComponent'
+import router from '@ohos.router'
 
-@Entry
+@Extend(Image)
+function iconStyle(){
+  .width(26)
+  .height(26)
+  .margin({right: 10})
+}
+
+
 @Component
-struct Canteen{
+export struct Canteen{
 
   @State title:string = '食堂'
-
-  // private title:string = '食堂'
-
-  //  食堂种类
-  @State canteen: CanteenData[] = [
-    new CanteenData('楚园'),
-    new CanteenData('汉园')
-  ]
-
-
 
   build(){
     Column(){
       //  分为三部分
       //  第一部分 本页标题
-      Row(){
-        Text(this.title)
-      }
+      HeaderComponent({title: `${this.title}`})
+        .margin(10)
       //  第二你分 内容
       Column(){
-        ItemComponent({message: '汉园' })
-        // ItemComponent({ message: '汉园' })
+        Row(){  // 楚园食堂
+          Image($r('app.media.restaurant'))
+            .iconStyle()
+
+          Text('楚园')
+        }
         .width('90%')
-        ItemComponent({message: 'chuyuan' })
-          // ItemComponent({ message: '汉园' })
-          .width('90%')
+        .justifyContent(FlexAlign.Start)
+        .backgroundColor(Color.Gray)
+        .borderRadius(10)
+        .padding(8)
+        .margin({top: 10})
+        .onClick(() =>{
+          router.pushUrl({ url: '../CanteenB' })
+        })
+
+        Row(){  // 汉园食堂
+          Image($r('app.media.restaurant'))
+            .width(26)
+            .height(26)
+            .margin({right: 10})
+
+          Text('汉园')
+        }
+        .width('90%')
+        .justifyContent(FlexAlign.Start)
+        .backgroundColor(Color.Gray)
+        .borderRadius(10)
+        .padding(8)
+        .margin({top: 10})
+
+        Row(){  // 商业街
+          Image($r('app.media.restaurant'))
+            .width(26)
+            .height(26)
+            .margin({right: 10})
+
+          Text('商业街')
+        }
+        .width('90%')
+        .justifyContent(FlexAlign.Start)
+        .backgroundColor(Color.Gray)
+        .borderRadius(10)
+        .padding(8)
+        .margin({top: 10})
+
       }
-      //  第三部分 导航栏
+      .width('100%')
+      .alignItems(HorizontalAlign.Center)
     }
     .width('100%')
     .height('100%')
